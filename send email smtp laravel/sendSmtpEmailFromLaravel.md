@@ -41,7 +41,7 @@
 // c. in build function add tempate thats want to show in email
 // public function build() {
 //     return $this->view("templateFolderName.templateName")
-//     ->replyTo("info@wizcodez.com","Wiz-Stamp") // if add to reply
+//     ->replyTo("email@gmail.com","Wiz-Stamp") // if add to reply
 //     ->with(array("getvaluebythisname"=>$this->name)); // if pass a values like in array
 // }
 // 4. for send email call emailClassName thats you make by commands from controllers function etc
