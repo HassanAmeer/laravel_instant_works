@@ -77,25 +77,31 @@
          'local_domain' => env('MAIL_EHLO_DOMAIN'),
      ],
      ```
-   - also Set SMTP configuration in the `.env` file.
-   - but .env is with original information
+   - also Set SMTP configuration in the `.env` file but .env is with original information
 
 3. **Create Email Template:**
    - Add or create an email template (e.g., `TemplateName.blade.php`) in the `resources/views` folder.
-   - Use `{{$getvaluebythisname}}` in template and for display values passed from
-   - the mail class -> EmailClassName if Need.
+   - Use `{{$getvaluebythisname}}` in template and for display values passed from the mail class -> EmailClassName if Need.
      
 4. **Mail Class Setup:**
    - Open the generated mail class (`app/Mail/EmailClassName.php`).
    - Define any variables in the constructor that you want to pass to the email template.
+     ```php
+       protected $variableName;
+       public function __construct($getValue)
+       {
+           $this->variableName = $getValue;
+       }
+
+     ```
    - Set the template name in the `content` method.
-   - In the `build` method, specify the template and any additional options:
+   - In the `build` method, specify the template and any additional options thats you needs:
      ```php
      public function build()
      {
          return $this->view('templateFolderName.templateName')
-             ->replyTo('email@gmail.com', 'Main Title') // Optional: Add a reply-to address
-             ->with(['getvaluebythisname' => $this->name]); // Optional: Pass values to the template
+             ->replyTo('name@gmail.com', 'Main Title') // Optional: Add a reply-to address
+             ->with(['getvaluebythisname' => $this->variableName]); // Optional: Pass values to the template
      }
      ```
 
@@ -105,7 +111,7 @@
      use Illuminate\Support\Facades\Mail;
      use App\Mail\EmailClassName;
      
-     $check = Mail::to($recipientEmail)->send(new EmailClassName($resetCode));
+     $check = Mail::to($to@gmail.com)->send(new EmailClassName($sendValue));
      ```
    - Make sure to import the necessary classes.
 
