@@ -1,2 +1,2 @@
-# laravel_instant_works
-related only instant working modules 
+# laravel_modules for fast jobs 
+modules related only fast jobs
