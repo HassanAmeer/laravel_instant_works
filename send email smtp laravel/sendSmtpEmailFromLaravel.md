@@ -24,7 +24,7 @@
 //         ], // optional for write same.
 //  -> after this in .env file set email smtp configration with original information
 
-// 3. make or add templateName.blade.php in html -> for get value use {{$getvaluebythisname}} from app/Mail/emailClassName.php file from build function return view(templateName) if pass a value then attach -> with(getvaluebythisname=>value)
+// 3. make or add templateName.blade.php in html code in resources/view folder -> for get value use {{$getvaluebythisname}} from app/Mail/emailClassName.php file from build function return view(templateName) if pass a value then attach -> with(getvaluebythisname=>value)
 // a. constructor function for get value where this class is called
 // protected $name;
 // public function __construct($getName)
