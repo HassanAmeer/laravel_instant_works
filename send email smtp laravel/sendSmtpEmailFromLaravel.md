@@ -61,10 +61,10 @@
      ```bash
      php artisan make:mail EmailClassName
      ```
-   - The class will be generated at `app/Mail/EmailClassName.php`.
+   - The class EmailClassName will be generated at `app/Mail/EmailClassName.php`.
 
 2. **SMTP Configuration:**
-   - Open `config/mail.php` and configure SMTP settings:
+   - Open `config/mail.php` and configure SMTP settings: can write same
      ```php
      'smtp' => [
          'transport' => 'smtp',
@@ -77,12 +77,14 @@
          'local_domain' => env('MAIL_EHLO_DOMAIN'),
      ],
      ```
-   - Set SMTP configuration in the `.env` file.
+   - also Set SMTP configuration in the `.env` file.
+   - but .env is with original information
 
 3. **Create Email Template:**
    - Add or create an email template (e.g., `TemplateName.blade.php`) in the `resources/views` folder.
-   - Use `{{$variableName}}` to display values passed from the mail class.
-
+   - Use `{{$getvaluebythisname}}` in template and for display values passed from
+   - the mail class -> EmailClassName if Need.
+     
 4. **Mail Class Setup:**
    - Open the generated mail class (`app/Mail/EmailClassName.php`).
    - Define any variables in the constructor that you want to pass to the email template.
