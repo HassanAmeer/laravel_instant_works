@@ -95,6 +95,7 @@
            $run = Artisan::call('cache:clear');
            $run = Artisan::call('config:cache');
            $run = Artisan::call('route:clear');
+           $run = Artisan::call('queue:restart');
            // $run = Artisan::call('view:clear');
            return 'Cache Cleared';
        });
