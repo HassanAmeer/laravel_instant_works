@@ -67,6 +67,41 @@
      ```
    - Make sure to import the necessary classes.
 
+
+*. **Clear Cache and Troubleshooting:**
+   - In case of any issues related to SMTP or sending emails, run the following commands to clear cache and restart necessary services:
+     - Clear configuration cache:
+       ```bash
+       php artisan config:cache
+       ```
+     - Clear configuration files:
+       ```bash
+       php artisan config:clear
+       ```
+     - Clear application cache:
+       ```bash
+       php artisan cache:clear
+       ```
+     - Restart the queue worker (if applicable):
+       ```bash
+       php artisan queue restart
+       ```
+
+   - Alternatively, you can create a custom route for clearing cache and other related tasks:
+     - Add the following route in your `web.php` or `routes/web.php` file:
+       ```php
+       Route::get('/clear/cache', function () {
+           $run = Artisan::call('config:clear');
+           $run = Artisan::call('cache:clear');
+           $run = Artisan::call('config:cache');
+           $run = Artisan::call('route:clear');
+           // $run = Artisan::call('view:clear');
+           return 'Cache Cleared';
+       });
+       ```
+     - Access this route in your browser or through a tool like Postman to clear the cache manually.
+
+
 6. **Additional Notes:**
    - Customize the template and class according to your requirements.
    - Ensure that the email template is well-designed and contains dynamic content using Blade syntax.
