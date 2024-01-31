@@ -37,7 +37,7 @@
      
 4. **Mail Class Setup:**
    - Open the generated mail class (`app/Mail/EmailClassName.php`).
-   - Define any variables in the constructor that you want to pass to the email template.
+   - Define any variables in the constructor that you want to pass to the email template like this.
      ```php
        protected $variableName;
        public function __construct($getValue)
