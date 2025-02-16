@@ -28,7 +28,7 @@ if(isset($_POST['btnClicked'])){
     );
     $token = $credentials->fetchAuthToken(HttpHandlerFactory::build());
     
-    $accessToken = $token['access_token'];
+    $accessToken = $token['access_token']; // generate server token valid for 1 hour by default
     
     $ch = curl_init("https://fcm.googleapis.com/v1/projects/wodl-50f48/messages:send");
     
