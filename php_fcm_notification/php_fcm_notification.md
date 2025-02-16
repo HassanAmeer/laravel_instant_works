@@ -41,11 +41,26 @@ curl_setopt($ch, CURLOPT_VERBOSE, true);
 
 $notification = [
     'message' => [
+         // fcm token
         'token' => 'ex5mXjoiSuSvX2XWtAea6E:APA91bHmIF217sRuMuupv_GTpnQX-pPKYEIT_EG13ekzfIQHjm6fwLPTcKs3dhNeEVhzb2y-6diVKzHmw5hXXUz-M1rR1YC_fBfolO6TXNt4a6N6Mn9qkww',
         'notification' => [
             'title' => 'Hello',
             'body' => 'World',
+            'image' => 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png'
         ],
+         // optional
+        "webpush": {
+            "fcm_options": {
+                "link": "https://google.com"
+            }
+        },
+        'android' => [
+            'priority' => 'high',
+            'ttl' => '3600s',
+        ],
+        'data' => [
+            'mydata' => json_encode(['messagefrom' => 'server01', 'type' => 'test'])
+        ]
     ]
 ];
 
