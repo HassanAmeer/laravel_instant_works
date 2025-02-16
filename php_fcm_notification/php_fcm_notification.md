@@ -22,65 +22,66 @@ use Google\Auth\Credentials\ServiceAccountCredentials;
 use Google\Auth\HttpHandler\HttpHandlerFactory;
 
 if(isset($_POST['btnClicked'])){
-$credentials = new ServiceAccountCredentials(
-    'https://www.googleapis.com/auth/firebase.messaging',
-    json_decode(file_get_contents('fcm.json'), true)
-);
-$token = $credentials->fetchAuthToken(HttpHandlerFactory::build());
-
-$accessToken = $token['access_token'];
-
-$ch = curl_init("https://fcm.googleapis.com/v1/projects/wodl-50f48/messages:send");
-
-curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Content-Type: application/json',
-    'Authorization: Bearer ' . $accessToken
-]);
-
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_VERBOSE, true);
-
-$notification = [
-    'message' => [
-         // fcm token
-        'token' => 'ex5mXjoiSuSvX2XWtAea6E:APA91bHmIF217sRuMuupv_GTpnQX-pPKYEIT_EG13ekzfIQHjm6fwLPTcKs3dhNeEVhzb2y-6diVKzHmw5hXXUz-M1rR1YC_fBfolO6TXNt4a6N6Mn9qkww',
-        'notification' => [
-            'title' => 'Hello',
-            'body' => 'World',
-            'image' => 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png'
-        ],
-         // optional
-        "webpush": {
-            "fcm_options": {
-                "link": "https://google.com"
-            }
-        },
-        'android' => [
-            'priority' => 'high',
-            'ttl' => '3600s',
-        ],
-        'data' => [
-            'mydata' => json_encode(['messagefrom' => 'server01', 'type' => 'test'])
+    $credentials = new ServiceAccountCredentials(
+        'https://www.googleapis.com/auth/firebase.messaging',
+        json_decode(file_get_contents('fcm.json'), true)
+    );
+    $token = $credentials->fetchAuthToken(HttpHandlerFactory::build());
+    
+    $accessToken = $token['access_token'];
+    
+    $ch = curl_init("https://fcm.googleapis.com/v1/projects/wodl-50f48/messages:send");
+    
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json',
+        'Authorization: Bearer ' . $accessToken
+    ]);
+    
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_VERBOSE, true);
+    
+    $notification = [
+        'message' => [
+             // fcm token
+            'token' => 'ex5mXjoiSuSvX2XWtAea6E:APA91bHmIF217sRuMuupv_GTpnQX-pPKYEIT_EG13ekzfIQHjm6fwLPTcKs3dhNeEVhzb2y-6diVKzHmw5hXXUz-M1rR1YC_fBfolO6TXNt4a6N6Mn9qkww',
+            'notification' => [
+                'title' => 'Hello',
+                'body' => 'World',
+                'image' => 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png'
+            ],
+             // optional
+            "webpush": {
+                "fcm_options": {
+                    "link": "https://google.com"
+                }
+            },
+            'android' => [
+                'priority' => 'high',
+                'ttl' => '3600s',
+            ],
+            'data' => [
+                'mydata' => json_encode(['messagefrom' => 'server01', 'type' => 'test'])
+            ]
         ]
-    ]
-];
-
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($notification));
-
-$response = curl_exec($ch);
-
-if (curl_errno($ch)) {
-    echo 'fcm Curl error: ' . curl_error($ch);
-} else {
-    echo "fcm response:".$response;
+    ];
+    
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($notification));
+    
+    $response = curl_exec($ch);
+    
+    if (curl_errno($ch)) {
+        echo 'fcm Curl error: ' . curl_error($ch);
+    } else {
+        echo "fcm response:".$response;
+    }
+    
+    curl_close($ch);
+    
+    echo '<pre>';
+    print_r("response: " . $response);
+    print_r("token: " . $token);
+    echo '</pre>';
 }
 
-curl_close($ch);
-
-echo '<pre>';
-print_r("response: " . $response);
-print_r("token: " . $token);
-echo '</pre>';
-}
 
 ```
