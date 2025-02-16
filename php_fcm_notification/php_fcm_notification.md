@@ -21,6 +21,7 @@ require_once('vendor/autoload.php');
 use Google\Auth\Credentials\ServiceAccountCredentials;
 use Google\Auth\HttpHandler\HttpHandlerFactory;
 
+if(isset($_POST['btnClicked'])){
 $credentials = new ServiceAccountCredentials(
     'https://www.googleapis.com/auth/firebase.messaging',
     json_decode(file_get_contents('fcm.json'), true)
@@ -80,5 +81,6 @@ echo '<pre>';
 print_r("response: " . $response);
 print_r("token: " . $token);
 echo '</pre>';
+}
 
 ```
